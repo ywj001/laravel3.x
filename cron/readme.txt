@@ -1,0 +1,1 @@
+01 1 * * * root /usr/bin/php  /www/mincms_test/cron/demo.php

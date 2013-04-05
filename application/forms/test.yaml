@@ -1,0 +1,23 @@
+test
+title:
+     label:'标题'
+     element:'text'
+     validation:
+          required:true
+          min:5
+file:
+     label:'文件'
+     element:'file'
+     validation:
+          required:true 
+          
+body:
+   label:'内容'
+   element:'textarea'
+   validation:
+       required:true 
+   plugins:
+       ckeditor:
+         UIcolor:blue    
+保存: 
+   element:'submit'    

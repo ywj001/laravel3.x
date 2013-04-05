@@ -1,0 +1,16 @@
+a{text-decoration: none;}
+.pagination .next_page,.pagination .previous_page{display:none;}
+.pagination li{
+float:left;list-style:none;margin-right:10px;border-radius: 5px;
+font-size: 1.3em;
+padding: .55em;
+color: #000;
+background: #fff;
+}
+.pagination li.active{
+background: #0065a9;
+}
+.pagination li.active a{
+color: #fff;
+}
+.alert-error{background:#ed4f1c;padding:2px 0px 2px 5px;border-radius: 5px;color:#fff}

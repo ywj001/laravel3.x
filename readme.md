@@ -1,2 +1,14 @@
---- MinCMS is a free Open Source.
-In Develop Please Wait Stable Version
+## MinCMS is a free Open Source.
+- Custom Content System Base On Laravel 3.2.x
+- Now You git clone and try.
+- it is free , you can use to any where.
+
+## Install
+- run <code> /install </code>
+- after run install  remove <code>public/install</code>
+- for login url is <code>/core</code> username is:<code>admin</code> password is <code>123456</code>
+- logined and change your password and email.
+- send mail set in application/config/email.php
+
+
+## Have a good trip for your application

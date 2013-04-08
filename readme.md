@@ -11,5 +11,6 @@
 - send mail set in <code>application/config/email.php</code>
 - set upload dir <code>mkdir public/uploads</code>
 
+## documents
 
 ## Have a good trip for your application

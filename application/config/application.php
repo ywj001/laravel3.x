@@ -66,8 +66,8 @@ return array(
 	| disable the toolbar for production applications.
 	|
 	*/
-	'profiler' =>false,
-	//'profiler' => $_SERVER['REMOTE_ADDR']=='127.0.0.1'?true:false,
+
+	'profiler' => $_SERVER['REMOTE_ADDR']=='127.0.0.1'?true:false,
 
 	/*
 	|--------------------------------------------------------------------------

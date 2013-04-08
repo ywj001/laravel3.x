@@ -8,7 +8,8 @@
 - after run install  remove <code>public/install</code>
 - for login url is <code>/core</code> username is:<code>admin</code> password is <code>123456</code>
 - logined and change your password and email.
-- send mail set in application/config/email.php
+- send mail set in <code>application/config/email.php</code>
+- set upload dir <code>mkdir public/uploads</code>
 
 
 ## Have a good trip for your application

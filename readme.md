@@ -15,6 +15,7 @@
 - set upload dir <code>mkdir public/uploads</code>
 
 ## documents
+- default error_reporting(0); if debug remove <code>error_reporting(0);</code> in <code>application/config/application.php</code> line 2
 - on writing,please wait.
 - Chinese test document on(http://test.mincms.com/doc/index/home)
 

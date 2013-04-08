@@ -21,6 +21,8 @@ class Core_Imagecache_Controller extends  Base_Controller {
 		//判断权限
  		$this->has_access("system.imagecache");
  		Menu::active(array('imagecache'));  
+ 		$lan = Helper::theme_language('language_admin','language',true)?:'en';    
+		Config::set('application.language',$lan);
  	}
  	function data($id){
  		$cache_id = 'imagecache_data_'.$id;

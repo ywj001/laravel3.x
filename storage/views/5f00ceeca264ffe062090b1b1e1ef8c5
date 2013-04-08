@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>MinCMS Stable</title> 
-    {{HTML::script('misc/jquery/jquery-1.7.2.min.js');}} 
+    <?php echo HTML::script('misc/jquery/jquery-1.7.2.min.js');; ?> 
 <?php 
    $theme = Helper::theme_language('theme','theme',true)?:'default';  
    $li = array(
@@ -89,19 +89,19 @@ plugin('noty',array(
 <![endif]-->
 </head>
 <body>
-	 <div class="navbar {{$top_class}} navbar-fixed-top ">
+	 <div class="navbar <?php echo $top_class; ?> navbar-fixed-top ">
 		<div class="navbar-inner">
 			<div class="container">
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> 
-				<a class="brand" href="{{action('core/home/index');}}">{{__('admin.home')}}</a>
+				<a class="brand" href="<?php echo action('core/home/index');; ?>"><?php echo __('admin.home'); ?></a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li class="dropdown @if(is_array(Menu::get_active()) && in_array('content',Menu::get_active()))
+						<li class="dropdown <?php if(is_array(Menu::get_active()) && in_array('content',Menu::get_active())): ?>
 							active
-							@endif">
+							<?php endif; ?>">
 							<a href="#" class="dropdown-toggle " data-toggle="dropdown" >
-									{{__('admin.content')}} <b class="caret"></b></a>
+									<?php echo __('admin.content'); ?> <b class="caret"></b></a>
 							<?php 
 								$rows = \DB::table('fields')->where('pid','=',0)
 								 	->order_by('sort','desc')
@@ -128,11 +128,11 @@ plugin('noty',array(
 							?> 
 						</li>
 						
-						<li class="dropdown @if(is_array(Menu::get_active()) && in_array('system',Menu::get_active()))
+						<li class="dropdown <?php if(is_array(Menu::get_active()) && in_array('system',Menu::get_active())): ?>
 							active
-							@endif">
+							<?php endif; ?>">
 							<a href="#" class="dropdown-toggle " data-toggle="dropdown" >
-									{{__('admin.system')}} <b class="caret"></b></a>
+									<?php echo __('admin.system'); ?> <b class="caret"></b></a>
 							<?php  
 								echo '<ul class="dropdown-menu">';
 							 
@@ -150,12 +150,12 @@ plugin('noty',array(
 							?> 
 						</li>
 								
-						<li class="dropdown @if(is_array(Menu::get_active()) && in_array('module',Menu::get_active()))
+						<li class="dropdown <?php if(is_array(Menu::get_active()) && in_array('module',Menu::get_active())): ?>
 							active
-							@endif
+							<?php endif; ?>
 							">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									{{__('admin.module')}}<b class="caret"></b></a>
+									<?php echo __('admin.module'); ?><b class="caret"></b></a>
 									<?php
 										$cache = new QCache_PHPDataFile;
 										$modules = $cache->get('bundles');  
@@ -163,12 +163,12 @@ plugin('noty',array(
 										if($modules){
 									?>	
 							 <ul class="dropdown-menu">
-							 	@if(Auth::user()->id==1) 
+							 	<?php if(Auth::user()->id==1): ?> 
 							 	<li <?php 
 							 			if(is_array(Menu::get_active()) && in_array('module_index',Menu::get_active()))
 							 			echo "class='active'";
-							 			?>><a href="{{action('core/module/index');}}"  >  {{__('admin.module list')}}</a></li>		
-						 		@endif
+							 			?>><a href="<?php echo action('core/module/index');; ?>"  >  <?php echo __('admin.module list'); ?></a></li>		
+						 		<?php endif; ?>
 								<?php 
 								foreach($modules as $k=>$v){
 									unset($active);
@@ -176,9 +176,9 @@ plugin('noty',array(
 										$active="class='active'";
 									}
 								?>
-								@if(CMS::check("module.$k"))
-								<li <?php echo $active;?>><a href="{{action($k.'/home/index')}}" title="{{$k}}">{{__('admin.'.$k)}}</a></li>
-								@endif
+								<?php if(CMS::check("module.$k")): ?>
+								<li <?php echo $active;?>><a href="<?php echo action($k.'/home/index'); ?>" title="<?php echo $k; ?>"><?php echo __('admin.'.$k); ?></a></li>
+								<?php endif; ?>
 								<?php }?>
 						    </ul>
 							<?php 
@@ -187,34 +187,34 @@ plugin('noty',array(
 						</li>
 		
 						<?php $menus = Menu::init();?>
-						@if($menus)
-							@foreach($menus as $label=>$menu)
-							<li @if($menu['active']==$label) 
+						<?php if($menus): ?>
+							<?php foreach($menus as $label=>$menu): ?>
+							<li <?php if($menu['active']==$label): ?> 
 								class='active'
-								@endif
+								<?php endif; ?>
 								>
-								<a href="{{$menu['url']}}"> 
-										<i class="icon-{{$menu['icon']}} "></i> 
-										{{__("admin.$label")}}
+								<a href="<?php echo $menu['url']; ?>"> 
+										<i class="icon-<?php echo $menu['icon']; ?> "></i> 
+										<?php echo __("admin.$label"); ?>
 								</a>
 							</li>
-							@endforeach   
-						@endif 
+							<?php endforeach; ?>   
+						<?php endif; ?> 
 							
 					</ul>
 				 
 					<ul class="nav pull-right">
 						<li>
-							<a href="{{action('core/user/edit',array('id'=>Auth::user()->id));}}"><i class="icon-user"></i> {{ Auth::user()->username;}}</a>
+							<a href="<?php echo action('core/user/edit',array('id'=>Auth::user()->id));; ?>"><i class="icon-user"></i> <?php echo  Auth::user()->username;; ?></a>
 						</li>
 						<li>
-							<a href="{{action('core/logout/index')}}"><i class="icon-off"></i>{{__('admin.logout');}}</a>
+							<a href="<?php echo action('core/logout/index'); ?>"><i class="icon-off"></i><?php echo __('admin.logout');; ?></a>
 						</li>
 					</ul>
 				   <ul class="nav pull-right" id="main-menu-right" style="margin-top: 10px;" title="">
-		          @foreach($li as $k=>$v)
-		          <li style='margin-right:5px;' class='hand'><span class="label li " style="background:{{$v}}" rel='{{Helper::get_url(array('theme'=>$k))}}'>&nbsp;</span></li>
-		          @endforeach
+		          <?php foreach($li as $k=>$v): ?>
+		          <li style='margin-right:5px;' class='hand'><span class="label li " style="background:<?php echo $v; ?>" rel='<?php echo Helper::get_url(array('theme'=>$k)); ?>'>&nbsp;</span></li>
+		          <?php endforeach; ?>
 		        </ul>
 				</div>
 			</div>
@@ -237,9 +237,9 @@ plugin('noty',array(
 			 		}
 			  
 			?>
-			  @if(CMS::check("node.".$row->value.".index"))
-		      <li {{$active}}><a href="{{action('core/node/index',array('name'=>$row->value))}}">{{$row->label}}</a></li>
-		      @endif
+			  <?php if(CMS::check("node.".$row->value.".index")): ?>
+		      <li <?php echo $active; ?>><a href="<?php echo action('core/node/index',array('name'=>$row->value)); ?>"><?php echo $row->label; ?></a></li>
+		      <?php endif; ?>
 		      <?php 
 		       } }
 			  ?> 
@@ -251,7 +251,7 @@ plugin('noty',array(
 		 		  foreach($i18n as $k=>$v){
 		 		?>
 				<li style='float:right'>
-					<a href="{{Helper::get_url(array('language'=>$k))}}"><img src="{{URL::base().'/misc/i18n/'.$k.'.gif'}}" title="{{$v}}">  </a>
+					<a href="<?php echo Helper::get_url(array('language'=>$k)); ?>"><img src="<?php echo URL::base().'/misc/i18n/'.$k.'.gif'; ?>" title="<?php echo $v; ?>">  </a>
 				</li>
 				<?php }?>
 		    </ul>
@@ -262,13 +262,13 @@ plugin('noty',array(
 	 </div>	
 	<div class="container" id="main">   
 		 		  
-			@if(CMS::get('navigation')) 
-			<blockquote><p><h3>{{CMS::get('navigation');}}</h3></p></blockquote>  	<div class="flash_message"> </div>
+			<?php if(CMS::get('navigation')): ?> 
+			<blockquote><p><h3><?php echo CMS::get('navigation');; ?></h3></p></blockquote>  	<div class="flash_message"> </div>
 				<div id='revision'  ></div>
 			<hr>
-			@endif
+			<?php endif; ?>
 				
-			@yield('content') 
+			<?php echo \Laravel\Section::yield('content'); ?> 
 			<div style="height:50px;"></div> 
 	</div> 
 	<div id='update' class='fixed_message_main' style='display:none;' ></div>
@@ -276,11 +276,11 @@ plugin('noty',array(
 	    <div class="container">
 	        <p class="powered">
 			 Powered by MinCMS Stable<br> 
-	        </p><p class="copy">Copyright © 2013-{{date('Y')}} by <a href="http://www.mincms.com" target='_blank'>MinCMS Stable</a> </p>
+	        </p><p class="copy">Copyright © 2013-<?php echo date('Y'); ?> by <a href="http://www.mincms.com" target='_blank'>MinCMS Stable</a> </p>
 	    </div>
 	</footer>
-{{ CMS::render();}} 
-{{ Asset::styles();}}
-{{ Asset::scripts();}} 
+<?php echo  CMS::render();; ?> 
+<?php echo  Asset::styles();; ?>
+<?php echo  Asset::scripts();; ?> 
 </body>
 </html>

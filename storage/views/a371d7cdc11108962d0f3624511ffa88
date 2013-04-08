@@ -1,0 +1,49 @@
+<?php \Laravel\Section::start('title2'); ?> 
+<?php echo __('admin.user list'); ?> 
+<?php \Laravel\Section::stop(); ?>
+
+<?php \Laravel\Section::start('content'); ?> 
+<div class="row-fluid">  
+	<div class="span12 m-widget"> 
+		<div class="m-widget-body">
+			<table class="table table-bordered  table-hover ">
+				<thead>
+					<tr> 
+						<th>ID</th>
+						<th><?php echo __('admin.username'); ?></th>
+						<th style="width:50px;"><?php echo __('admin.actions'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($users->results  as $user): ?>	
+					<tr> 
+						<td><?php echo $user->id; ?></td>
+						<td><?php echo $user->username; ?></td>
+						<td class="tr">
+							<div style="float:right;">
+							<a style='margin-right:10px;' href="<?php echo action('core/user/edit',array('id'=>$user->id));; ?>" ><i class='icon-pencil'></i></a> 
+							<?php if($user->display==1): ?> 
+							<a title="<?php echo __('admin.enabled'); ?>" href="<?php echo action('core/user/del',array('id'=>$user->id));; ?>"  ><i class="icon-ok"></i></a>
+							<?php else: ?>
+							<a title="<?php echo __('admin.disabled'); ?>"href="<?php echo action('core/user/del',array('id'=>$user->id));; ?>"  ><i class="icon-ban-circle" style="color: red;"></i></a>
+							<?php endif; ?>
+							
+								 
+							</div>
+						</td>
+					</tr>
+				    <?php endforeach; ?>
+				</tbody>
+			</table>
+			
+			
+		</div>
+	  </div>
+</div>	
+<?php echo $users->links();; ?>
+<br><a href="<?php echo action('core/user/add'); ?>" class="btn">
+	<i class="icon-plus"></i> <strong><?php echo __('admin.create user'); ?></strong>
+</a>
+						
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('core::layout')->with(get_defined_vars())->render(); ?>

@@ -1,0 +1,59 @@
+<?php \Laravel\Section::start('content'); ?>  
+<?php
+CMS::script('fouce',"
+	$('#old_password').focus();
+	if($('#old_password').val()){
+		$('#password').focus();
+	}
+	if($('#password').val()){
+		$('#password_confirmation').focus();
+	}
+	");
+?>
+</script>
+		 <div class=" ">
+	        <legend><?php echo __('admin.user edit'); ?> #<?php echo $user->id; ?>
+</legend>
+	        <?php echo Form::open();; ?> <?php echo Form::token();; ?> 
+	        	<input class="span3"   type="text"   name="username" value="<?php echo $user->username; ?>" readonly='readonly'>  
+	            <p> <blockquote><?php echo __('admin.username'); ?></blockquote>
+		            <input class="span3" placeholder="<?php echo __('admin.old password'); ?>" value="<?php echo Input::get('old_password');; ?>"  type="password" id="old_password" name="old_password">  
+					<?php if($validation): ?>
+		            	<?php echo $validation->first('old_password',"<p class='alert alert-error'>:message</p>"); ?>
+		            <?php endif; ?>  
+	            </p> 
+	            <p><blockquote><?php echo __('admin.password'); ?></blockquote>
+		            <input class="span3" placeholder="<?php echo __('admin.new password'); ?>" value="<?php echo Input::get('password');; ?>" type="password" id="password" name="password">  
+					<?php if($validation): ?>
+		            	<?php echo $validation->first('password',"<p class='alert alert-error'>:message</p>"); ?>
+		            <?php endif; ?>   
+	            </p>
+	            <p>
+		            <blockquote><?php echo __('admin.password_confirmation'); ?></blockquote>
+		            <input class="span3" placeholder="<?php echo __('admin.password_confirmation'); ?>" value="<?php echo Input::get('password_confirmation');; ?>" type="password" id="password_confirmation" name="password_confirmation"> 
+		            <?php if($validation): ?>
+		            	<?php echo $validation->first('password_confirmation',"<p class='alert alert-error'>:message</p>"); ?>
+		            <?php endif; ?>
+		            <?php if($error): ?>
+		             <p class='alert alert-error'><?php echo __('admin.old password incorrect'); ?></p> 
+		            <?php endif; ?>  
+	            </p>	
+	            
+	            <p><blockquote><?php echo __('admin.email'); ?><span class='label label-info'><?php echo __('admin.find password'); ?></span></blockquote>
+		            <input class="span3" placeholder="<?php echo __('admin.find password'); ?>" value="<?php if(Input::get('email')): ?>
+<?php echo Input::get('email'); ?>
+<?php else: ?>
+<?php echo $user->email; ?><?php endif; ?>" type="text" id="email" name="email">  
+					<?php if($validation): ?>
+		            	<?php echo $validation->first('email',"<p class='alert alert-error'>:message</p>"); ?>
+		            <?php endif; ?>
+ 	            </p>     
+	            	        	
+	             
+	            <button class="btn-info btn" type="submit"><?php echo __('admin.save'); ?></button>      
+		     <?php echo Form::close();; ?>
+	      </div>
+		 
+ 					
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('core::layout')->with(get_defined_vars())->render(); ?> 

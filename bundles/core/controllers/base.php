@@ -41,7 +41,7 @@ class Core_Base_Controller extends Base_Controller {
 	} 
 	//语言切换
 	function _i18n(){
-		$lan = Helper::theme_language('language_admin','language',true)?:'en';   
+		$lan = Helper::theme_language('language_admin','language',true)?:'en';    
 		Config::set('application.language',$lan);
 	}
 	function has_access($key,$id=0){ 

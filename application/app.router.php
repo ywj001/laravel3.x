@@ -1,7 +1,9 @@
 <?php 
 Config::set('mincms.theme','default');
 
-Route::get('/', 'home@index');  
+Route::get('/',function(){
+	return theme('index');
+});  
 
 
  

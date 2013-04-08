@@ -1,0 +1,45 @@
+<?php \Laravel\Section::start('title2'); ?> 
+<?php echo __('admin.content type'); ?> 
+<?php \Laravel\Section::stop(); ?>
+
+<?php \Laravel\Section::start('content'); ?> 
+<div class="row-fluid">  
+	<div class="span12 m-widget"> 
+		<div class="m-widget-body">
+			<?php echo Form::open(null,null,array('id'=>'sort')); ?> 	
+			<table  class="table table-bordered  table-hover ">
+				<thead>
+					<tr> 
+						<th><?php echo __('admin.label'); ?></th>
+						<th><?php echo __('admin.filed name'); ?></th>
+						<th style="width:210px;"><?php echo __('admin.actions'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($posts->results  as $user): ?>	
+					<tr> 
+						<td> <i class="icon-move"></i>&nbsp;<input type='hidden' name='ids[]' value="<?php echo $user->id; ?>"><?php echo $user->label; ?></td>
+						<td><?php echo $user->value; ?></td>
+						<td class="tr">
+							<div style="float:right;">
+							<a href="<?php echo action('core/type/fileds',array('id'=>$user->id));; ?>" class="btn"> <strong><?php echo __('admin.fileds'); ?></strong></a>
+							<a href="<?php echo action('core/type/edit',array('id'=>$user->id));; ?>" class="btn"><i class="icon-edit"></i> <strong><?php echo __('admin.edit'); ?></strong></a>
+							<a href="<?php echo action('core/type/del',array('id'=>$user->id));; ?>" class="btn"><i class="icon-trash"></i> <strong><?php echo __('admin.delete'); ?></strong></a>
+							</div>
+						</td>
+					</tr>
+				    <?php endforeach; ?>
+				</tbody>
+			</table>
+			<?php echo Form::close(); ?>
+			
+		</div>
+	  </div>
+</div>	
+<?php echo $posts->links();; ?>
+<br><a href="<?php echo action('core/type/add'); ?>" class="btn">
+	<i class="icon-plus"></i> <strong><?php echo __('admin.create content type'); ?></strong>
+</a> 
+<?php echo Helper::ui_sort('#sort',action('core/type/sort'));; ?>
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('core::layout')->with(get_defined_vars())->render(); ?>

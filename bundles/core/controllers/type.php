@@ -13,7 +13,7 @@ class Core_Type_Controller extends Core_Base_Controller {
  	function init(){
  		if(Auth::user()->id!=1)
  			throw new Exception('access deny'); 
- 		if($_SERVER['REMOTE_ADDR']!='127.0.0.1') exit(__('admin.content fields just support on development environment')); 
+ 		if(trim(gethostbyname($_SERVER['SERVER_NAME']))!='127.0.0.1') exit(__('admin.content fields just support on development environment')); 
  		$this->spyc  = new Spyc;
  		Menu::active('content type'); 
  		CMS::set('select2',true);

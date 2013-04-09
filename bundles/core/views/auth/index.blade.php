@@ -6,6 +6,7 @@
 @section('content') 
  
 <blockquote><h3>{{__('admin.user group')}}</h3></blockquote>	
+@if($groups)
 <div class="row-fluid">   
 	<div class="span12 m-widget"> 
 		<div class="m-widget-body">
@@ -14,7 +15,7 @@
 					<tr> 
 						<th>{{__('admin.group name')}}</th>
 						<th>{{__('admin.user')}}</th>
-						<th style="width:20px;"> </th>
+						<th style="width:50px;"> </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,7 +40,9 @@
 							<div style="float:right;">
 								<a href="{{action('core/auth/group_add',array('id'=>$g->id));}}"  >
 									<i class="icon-edit"></i> </a>
-								 
+								&nbsp;
+								<a href="{{action('core/auth/remove',array('id'=>$g->id));}}"  >
+									<i class="icon-remove"></i> </a> 
 							</div>
 						</td>
 					</tr>
@@ -51,7 +54,7 @@
 		</div>
 	  </div>
 </div>	
-		
+@endif		
 <p>
 	<a href="{{action('core/auth/group_add')}}" class="btn">
 		<i class="icon-plus"></i> <strong>{{__('admin.create user group')}}</strong>

@@ -30,7 +30,7 @@ return array(
 	|
 	*/
 
-	'detail' => $_SERVER['REMOTE_ADDR']=='127.0.0.1'?true:false,
+	'detail' => trim(gethostbyname($_SERVER['SERVER_NAME']))=='127.0.0.1'?true:false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -43,7 +43,7 @@ return array(
 	|
 	*/
 
-	'log' => $_SERVER['REMOTE_ADDR']=='127.0.0.1'?false:true,
+	'log' => trim(gethostbyname($_SERVER['SERVER_NAME']))=='127.0.0.1'?false:true,
 
 	/*
 	|--------------------------------------------------------------------------

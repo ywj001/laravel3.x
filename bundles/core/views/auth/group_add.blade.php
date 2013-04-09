@@ -21,9 +21,13 @@ plugin('select2');
 	            <p>
 	            	<blockquote><span class='label label-info'>{{__('admin.group access')}}</span></blockquote>
 	            	<div style='margin-left:20px;'>
+	            		@if(CMS::access_list())
 			            @foreach(CMS::access_list() as $k=>$v)
 			            	<blockquote ><span class='label label-info'>{{__("admin.$k")}}</span></blockquote>
 				            	<div style='margin-left:50px; clear:both;margin-bottom:20px;'>
+				            	 
+				            	<?php if(!$v) continue;?>
+				            	 
 				            	@foreach($v as $key=>$val)
 				            		@if(!is_array($val))
 				            			<span class='hand label @if($post && $post->access[$k][$val]) label-success @endif' style='margin-right:10px;margin-bottom:10px;'>
@@ -50,6 +54,7 @@ plugin('select2');
 				            	@endforeach
 				            	</div>
 			            @endforeach
+			            @endif
 		            </div>
 	            </p>
 	            <p>

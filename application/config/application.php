@@ -1,5 +1,4 @@
-<?php
-error_reporting(0);
+<?php 
 return array(
 
 	/*
@@ -67,7 +66,7 @@ return array(
 	|
 	*/
 
-	'profiler' => $_SERVER['REMOTE_ADDR']=='127.0.0.1'?true:false,
+	'profiler' =>trim(gethostbyname($_SERVER['SERVER_NAME']))=='127.0.0.1'?true:false,
 
 	/*
 	|--------------------------------------------------------------------------

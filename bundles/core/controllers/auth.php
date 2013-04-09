@@ -54,6 +54,13 @@ class Core_Auth_Controller extends Core_Base_Controller {
 				$users = Input::get('users'); 
 			 	$access = serialize(Input::get('access'));
 			 	$memo = trim(Input::get('memo'));
+			 	if(!$id) {
+				 	$row = DB::table('groups') 
+						->where('title','=',$title)->first();
+				 	if($row)
+				 		$id = $row->id;
+			 	}
+			  
 			 	if($id){
 			 		DB::table('user_group')->where('gid','=',$id)->delete();
 					DB::table('groups')->where('id','=',$id)
@@ -77,7 +84,16 @@ class Core_Auth_Controller extends Core_Base_Controller {
  		return $views;
  		
  	}
- 	
+ 	function action_remove($id){
+ 		$group = DB::table('groups')->where('id','=',$id)->first();
+ 		if($_POST['delete']==1){
+ 			DB::table('groups')->where('id','=',$id)->delete();
+ 			DB::table('user_group')->where('gid','=',$id)->delete(); 
+ 			return Redirect::to_action('core/auth/index')
+			   ->with('success',__("admin.success")); 
+ 		}
+ 		return View::make('core::auth.del')->with('group',$group);
+ 	}
  	function action_edit($id){
 		$view = 'core::user.edit'; 
 		$user = DB::table('users')->where('id','=',$id)->first();
